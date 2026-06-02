@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set title = "Dashboard" %}
+{% block content %}
+<div class="top-row">
+    <h2>Welcome, {{ g.user['username'] }}</h2>
+    <form method="post" action="{{ url_for('logout') }}">
+        <button type="submit" class="secondary">Log out</button>
+    </form>
+</div>
+
+<section class="section">
+    <h3>Upload Files</h3>
+    <form method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data" class="form">
+        <label for="files">Select one or more files</label>
+        <input id="files" name="files" type="file" multiple required>
+        <button type="submit">Upload</button>
+    </form>
+</section>
+
+<section class="section">
+    <h3>Your Uploaded Files</h3>
+    {% if files %}
+        <ul class="file-list">
+            {% for file in files %}
+                <li>
+                    <a href="{{ url_for('get_file', file_id=file['id']) }}">{{ file['filename'] }}</a>
+                    <span class="muted">{{ file['upload_time'] }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="muted">No files uploaded yet.</p>
+    {% endif %}
+</section>
+{% endblock %}
