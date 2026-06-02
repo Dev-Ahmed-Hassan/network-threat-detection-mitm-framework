@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #111827;
+}
+
+.container {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.card {
+    width: 100%;
+    max-width: 720px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+h1, h2, h3 {
+    margin: 0 0 12px;
+}
+
+.badge {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: #e0e7ff;
+    color: #1e3a8a;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+.messages {
+    margin: 12px 0 18px;
+}
+
+.message {
+    margin: 0 0 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.message.error {
+    background: #fef2f2;
+    color: #7f1d1d;
+}
+
+.message.success {
+    background: #ecfdf5;
+    color: #065f46;
+}
+
+.form {
+    display: grid;
+    gap: 10px;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 10px;
+    font: inherit;
+}
+
+button {
+    margin-top: 4px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+button.secondary {
+    background: #475569;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.file-list li {
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.file-list a {
+    color: #1d4ed8;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.file-list a:hover {
+    text-decoration: underline;
+}
+
+.muted {
+    color: #6b7280;
+    font-size: 13px;
+}
