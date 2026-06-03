@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% set title = "Downgrade Demo" %}
+{% block content %}
+<h2>Downgrade Demo</h2>
+
+{% if blocked %}
+    <p class="message success">HSTS mode is active. Insecure HTTP fallback is blocked for this demo path.</p>
+    <p class="muted">HTTP login fallback that would have been used: {{ http_login_url }}</p>
+    <p><a href="{{ url_for('login') }}">Return to HTTPS login</a></p>
+{% else %}
+    <p class="message error">HTTP mode allows credentials and session cookies to travel over plaintext.</p>
+    <p class="muted">HTTP login path: <a href="{{ http_login_url }}">{{ http_login_url }}</a></p>
+{% endif %}
+{% endblock %}
