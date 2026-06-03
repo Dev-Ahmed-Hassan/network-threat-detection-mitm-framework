@@ -22,13 +22,14 @@ UPLOAD_DIR = BASE_DIR / "uploads"
 COOKIE_NAME = "session_id"
 
 
-def create_app(mode="http"):
+def create_app(mode="http", downgrade_http_port=5000):
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "demo-secret-key"
     app.config["MODE"] = mode
     app.config["DB_PATH"] = str(BASE_DIR / "app.db")
     app.config["UPLOAD_DIR"] = str(UPLOAD_DIR)
     app.config["ENABLE_HSTS"] = mode == "https_hsts"
+    app.config["DOWNGRADE_HTTP_PORT"] = downgrade_http_port
 
     UPLOAD_DIR.mkdir(exist_ok=True)
     init_db()
@@ -62,6 +63,28 @@ def create_app(mode="http"):
         if g.user is None:
             return redirect(url_for("login"))
         return None
+
+    @app.route("/downgrade-demo")
+    def downgrade_demo():
+        host = request.host.split(":", 1)[0]
+        http_login_url = f"http://{host}:{app.config['DOWNGRADE_HTTP_PORT']}{url_for('login')}"
+        mode = app.config["MODE"]
+
+        if mode == "https_hsts":
+            return render_template(
+                "downgrade_demo.html",
+                blocked=True,
+                http_login_url=http_login_url,
+            )
+
+        if mode == "https_no_hsts":
+            return redirect(http_login_url)
+
+        return render_template(
+            "downgrade_demo.html",
+            blocked=False,
+            http_login_url=http_login_url,
+        )
 
     @app.route("/")
     def dashboard():
