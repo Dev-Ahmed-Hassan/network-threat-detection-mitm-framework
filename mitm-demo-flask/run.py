@@ -18,12 +18,18 @@ def parse_args():
     )
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=5000)
+    parser.add_argument(
+        "--downgrade-http-port",
+        type=int,
+        default=5000,
+        help="HTTP port used by /downgrade-demo redirects in HTTPS no-HSTS mode.",
+    )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    app = create_app(mode=args.mode)
+    app = create_app(mode=args.mode, downgrade_http_port=args.downgrade_http_port)
 
     if args.mode == "http":
         app.run(host=args.host, port=args.port, debug=True)
